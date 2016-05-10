@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+require_relative 'codebreaker/codebreaker'
+
+Codebreaker::App.new.play

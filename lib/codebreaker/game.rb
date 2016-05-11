@@ -5,13 +5,13 @@ module Codebreaker
 
     attr_accessor :secret_code, :game_results, :hints, :turns
 
-    HINTS = 3
-    TURNS = 4
+    HINTS = 1
+    TURNS = 6
 
     def initialize
       @secret_code = ""
       @game_results = ""
-      @hints = Array.new(HINTS) { |i| i }
+      @hints = HINTS
       @turns = TURNS
     end
 
@@ -33,17 +33,18 @@ module Codebreaker
     end
 
     def hint
-      return "Hints are over" if @hints.size.eql? 0 
-      index = @hints.slice!(rand(@hints.size))
-      "#{index+1} number of secret code is #{@secret_code[index]}"
+      return "Hints are over" if @hints <= 0 
+      @hint = @secret_code[rand(4)]
+      @hints -= 1
+      "one of the numbers in secret code is #{@hint}"
     end
 
-    def save_score(name = 'unknown user')
+    def save_score(name)
       result = {}
-      result[:name] = name
+      result[:name] = name 
       result[:secret_code] = @secret_code
       result[:game_result] = @game_results
-      result[:used_hints] = HINTS - @hints.size
+      result[:used_hints] = HINTS - @hints
       result[:used_attemps] = TURNS - @turns
       result[:date] = Time.now
       File.open('text.yml', 'a') { |f| f.write YAML.dump(result) }

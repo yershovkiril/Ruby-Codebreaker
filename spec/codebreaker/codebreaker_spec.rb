@@ -37,7 +37,7 @@ module Codebreaker
         expect { app.play }.to output(/Would you like save result?/).to_stdout
       end
 
-      it 'ask your name if you approve to save result' do
+      it 'ask name if user approve to save result' do
         allow(app).to receive(:gets).and_return('Kiril')
         expect { app.save_game('y') }.to output(/Enter your name/).to_stdout
       end
@@ -48,8 +48,8 @@ module Codebreaker
       it "request for a hint (typed 'h') " do
         allow(app).to receive(:gets).and_return('h', 'false')
         game = app.instance_variable_get(:@game)
-        allow(game).to receive(:hint).and_return('1 number of secret code is 1')
-        expect { app._matcher }.to output(/1 number of secret code is 1/).to_stdout
+        allow(game).to receive(:hint).and_return('one of the numbers in secret code is 1')
+        expect { app._matcher }.to output(/one of the numbers in secret code is 1/).to_stdout
       end
 
       it 'return message if user enter invalid data' do

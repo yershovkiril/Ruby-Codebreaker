@@ -71,17 +71,17 @@ module Codebreaker
 
     context "#hint" do
       it "decrease current value of @hints by 1" do
-        expect { game.hint }.to change { game.hints.size }.by(-1)
+        expect { game.hint }.to change { game.hints }.by(-1)
       end
 
       it "return information message if count of hints equal 0" do
-        game.send(:hints=, [])
+        game.send(:hints=, 0)
         expect(game.hint).to eq('Hints are over')
       end
 
       it "return hint with one random number of secret code" do
-        game.send(:hints=, [0])
-        expect(game.hint).to eq("1 number of secret code is #{game.send(:secret_code)[0]}")
+        game.send(:secret_code=, '1111')
+        expect(game.hint).to eq("one of the numbers in secret code is 1")
       end
     end
   end

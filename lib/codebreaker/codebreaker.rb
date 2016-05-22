@@ -39,20 +39,17 @@ module Codebreaker
     end
 
     def save_game(answer)
-      if answer.match /^y/
-        puts "Enter your name"
-        @game.save_score(gets.chomp)
-      end
+      return unless answer.match /^y/
+      puts "Enter your name"
+      @game.save_score(gets.chomp)
     end
 
     def play_again
       puts "Would you like play again? (y/n)"
-      answer = gets.chomp
-      if answer.match /^y/
-        @game = Game.new
-        @game.start
-        self.play
-      end
+      return unless gets.chomp.match /^y/
+      @game = Game.new
+      @game.start
+      self.play
     end
   end
 end

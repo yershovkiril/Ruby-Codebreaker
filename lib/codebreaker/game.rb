@@ -16,7 +16,7 @@ module Codebreaker
     end
 
     def start
-      4.times { @secret_code << rand(1..6).to_s }
+      @secret_code = (1..4).map { rand(1..6) }.join
     end
 
     def verify_guess(guess)
@@ -54,20 +54,22 @@ module Codebreaker
     private
     def analyze_guess(guess)
       result = ''
-      code_split = @secret_code.split('')
-      out_dublicate = code_split
+      code_split =  @secret_code.split('')
 
       guess.split('').each_with_index do |char, index|
         if char.eql? code_split[index]
           result << "+"
-        elsif out_dublicate.include? char
-          result << "-"
+	        code_split[index] = nil
         end
+      end
 
-        out_dublicate[out_dublicate.index(char)] = nil unless out_dublicate.index(char).nil?
+      guess.split('').each_with_index do |char, index|
+        if code_split.include? char
+      	  result << '-'
+      	  code_split.delete_at(code_split.index(char))
+      	end
       end
       result
     end
-
   end
 end

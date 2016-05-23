@@ -64,12 +64,14 @@ module Codebreaker
       end
 
       guess.split('').each_with_index do |char, index|
+        next if code_split[index] == nil
         if code_split.include? char
       	  result << '-'
-      	  code_split.delete_at(code_split.index(char))
+          code_split[code_split.index(char)] = ''
       	end
       end
       result
     end
   end
 end
+

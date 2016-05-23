@@ -3,7 +3,7 @@ require 'spec_helper'
 module Codebreaker
   RSpec.describe Game do
     
-    let(:game) { Game.new }
+    subject(:game) { Game.new }
     before(:each) { game.start }
         
     context "#start" do
@@ -31,9 +31,9 @@ module Codebreaker
         expect(game.send(:analyze_guess, secret_code.reverse)).to eq('----')
       end
 
-      array_code = ['2234','1134','1243','1234','1234','1134','1134','1134','1234','1234','1234','1234','1234']
-      array_guess = ['2265','1115','2777','2545','5124','5115','5511','5111','1555','5224','5154','5234','5134']
-      array_result = ['++','++','-','--','+--','+-', '--','+-', '+','++', '+-', '+++', '++-']
+      array_code = ['2234','1134','1243','1234','1234','1134','1134','1134','1234','1234','1234','1234','1234','1212']
+      array_guess = ['2265','1115','2777','2545','5124','5115','5511','5111','1555','5224','5154','5234','5134','1211']
+      array_result = ['++','++','-','--','+--','+-', '--','+-', '+','++', '+-', '+++', '++-','+++']
       
       array_code.each_with_index do |code, i|
         it "secret_code - #{code} and guess - #{array_guess[i]} return #{array_result[i]}" do

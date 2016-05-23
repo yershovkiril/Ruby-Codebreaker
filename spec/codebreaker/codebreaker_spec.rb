@@ -2,8 +2,8 @@ require 'spec_helper'
 
 module Codebreaker
   RSpec.describe App do
-    let(:game) { Game.new }
-    let(:app) { App.new }
+    subject(:game) { Game.new }
+    subject(:app) { App.new }
     
     before (:each) do
       allow(app).to receive(:gets).and_return('1234')

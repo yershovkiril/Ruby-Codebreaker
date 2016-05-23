@@ -1,5 +1,4 @@
-require "codebreaker/game"
+require_relative "codebreaker/game"
+require_relative "codebreaker/codebreaker"
 
-module Codebreaker
-  # Your code goes here...
-end
+Codebreaker::App.new.play
